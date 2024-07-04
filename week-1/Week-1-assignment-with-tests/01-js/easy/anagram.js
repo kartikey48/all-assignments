@@ -8,7 +8,39 @@
 */
 
 function isAnagram(str1, str2) {
+  if (str1.length !== str2.length) {
+    return false;
+  }
 
+  // Function to create a character count object
+  function createCharObject(string) {
+    let charObject = {};
+    for (let char of string) {
+      if (charObject[char]) {
+        charObject[char]++;
+      } else {
+        charObject[char] = 1;
+      }
+    }
+    return charObject;
+  }
+
+  // Create character count objects for both strings
+  const charObject1 = createCharObject(str1);
+  const charObject2 = createCharObject(str2);
+
+  // Compare the two character count objects
+  for (let char in charObject1) {
+    if (charObject1[char] !== charObject2[char]) {
+      return false;
+    }
+  }
+
+  return true;
 }
+
+// Example usage
+console.log(isAnagram("kartikey", "keyarti")); // Should print: false
+console.log(isAnagram("listen", "silent")); // Should print: true
 
 module.exports = isAnagram;
